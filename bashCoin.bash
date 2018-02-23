@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # BashChain v0.1a : BASH Blockchain PoC : https://github.com/elemantalcode/bash-scripts
 
 # Set some basic blockchain variables
@@ -66,7 +65,7 @@ function mineBlock() {
                 mine_block=$( genBlock "$mine_index" "${mine_previous}" "${now}" "${mine_data}" "${nonce}" )
                 b=${mine_block:0:$difficulty}  # Check for prefixed 0s and match against difficulty
                 #echo "Trying HASH: $mine_block"
-                let nonce++                  # Increment nonce and try again
+                (( nonce++ ))                # Increment nonce and try again
         done
         echo "${mine_block}"             # Return with our new shiny "mined" block
 }
@@ -85,16 +84,16 @@ do                                           #  the requested limit
         # Go forth and multiply (and add to your lineage... or at the very least, our blockchain array)
         newblock=$( mineBlock "${chain_increment}" "${previous_block}" "${block_data}" )
         blockchain[$chain_increment]="IDX:${chain_increment},TIME:${now},HASH:${newblock},DATA:${block_data}"
-        let chain_increment++                    # Keep counting until we reach the requested block limit
+        (( chain_increment++ ))                  # Keep counting until we reach the requested block limit
 done
 
 OIFS="$IFS"                          # This is a naf cheat to avoid split lines on spaces
 IFS="
 "
 
-for block in ${blockchain[@]}        # Loop through every array entry (the blocks in the chain)
+for block in "${blockchain[@]}"      # Loop through every array entry (the blocks in the chain)
 do
         echo "${block}"              # .....aaaaand display them ;)
 done
 
-# The End
+IFS="$OIFS"
