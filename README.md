@@ -6,3 +6,6 @@ Specific use case when using "Artifactory" as a rpm store and it's in the cloud 
 
 * bashCoin.bash
 Proof of Concept to create a blockchain in BASH in under 100 lines of code. It's not pretty, but it works (depending on how loose your definition of "works" is)
+
+* awsGetSecurityGroups.bash
+Script to extract all security groups from all regions under all profiles in AWS. Used to create a quick audit of the security applied across an AWS account
