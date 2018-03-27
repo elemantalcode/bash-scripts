@@ -38,10 +38,10 @@ for PROFILE in ${PROFILES[*]}; do
   for REGION in ${REGIONS[*]}; do
     echo "  => $REGION"
     aws ec2 describe-security-groups --region "$REGION" --profile "$PROFILE" \
-      | jq -r '.SecurityGroups[] | .GroupId + ":" + .GroupName' | while IFS=: read -r GID NAME
+      | jq -r '.SecurityGroups[] | .GroupId + ":" + .GroupName + ":" + .VpcId' | while IFS=: read -r GID NAME VPC
       do
         # Print each security group
-        echo "    => $GID $NAME"
+        echo "    => $GID ($VPC) $NAME"
           # First show ingress
           getSg "In"
           echo "$RULE" | sed -e 's/^Port/        => Port/g'
