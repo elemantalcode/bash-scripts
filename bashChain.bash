@@ -96,4 +96,5 @@ do
         echo "${block}"              # .....aaaaand display them ;)
 done
 
+# Reset IFS
 IFS="$OIFS"
